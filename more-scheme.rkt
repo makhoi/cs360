@@ -1,3 +1,4 @@
+
 ;;
 ;; DO NOT REMOVE THESE TWO LINES
 ;;
@@ -16,6 +17,7 @@
 ;; Given a function f and a stream s, return a stream consisting of each element
 ;; x of the stream s paired with (f x).
 ;;
+
 (define (stream-pair-with f s)
   (stream-map (lambda (x) (cons x (f x))) s))
 
@@ -28,6 +30,7 @@
 ;; repeated applications of f to x. The elements of the stream are x, (f x),
 ;; (f (f x)), ...
 ;;
+
 (define (stream-iterate f x)
   (stream-cons x (stream-iterate f (f x))))
 
@@ -41,6 +44,7 @@
 ;; item in the pair is taken from xs and the second item in the pair is taken
 ;; from ys.
 ;;
+
 (define (stream-zip xs ys)
   (if (or (stream-empty? xs) (stream-empty? ys))
       empty-stream
@@ -60,6 +64,7 @@
 ;; Note that xs and ys may or may not be infinite, and they may or may not have
 ;; the same length if they are finite.
 ;; 
+
 (define (cycle-streams xs ys)
   (define (cycle s orig)
     (if (stream-empty? s)
@@ -78,10 +83,10 @@
 ;; Return the number of times the function has been called with an even
 ;; argument, including the current argument.
 ;;
+
 (define count-even
   (let ([count 0])
     (lambda (x)
       (when (even? x)
         (set! count (+ count 1)))
       count)))
-
