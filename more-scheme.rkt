@@ -18,7 +18,7 @@
 ;;
 
 (define (stream-pair-with f s)
-  'not-implemented)
+  (stream-map (lambda (x) (cons x (f x))) s))
 
 ;;
 ;; Problem 2
@@ -31,7 +31,8 @@
 ;;
 
 (define (stream-iterate f x)
-  'not-implemented)
+  (stream-cons x (stream-iterate f (f x))))
+
 
 ;;
 ;; Problem 3
@@ -44,7 +45,11 @@
 ;;
 
 (define (stream-zip xs ys)
-  'not-implemented)
+  (if (or (stream-empty? xs) (stream-empty? ys))
+      empty-stream
+      (stream-cons (cons (stream-first xs) (stream-first ys))
+                   (stream-zip (stream-rest xs) (stream-rest ys)))))
+
 
 ;;
 ;; Problem 4
@@ -60,7 +65,14 @@
 ;; 
 
 (define (cycle-streams xs ys)
-  'not-implemented)
+  (define (cycle s orig)
+    (if (stream-empty? s)
+        (cycle orig orig)
+        (stream-cons (stream-first s)
+                     (cycle (stream-rest s) orig))))
+  (stream-zip (cycle xs xs) (cycle ys ys)))
+
+
 
 ;;
 ;; Problem 5
@@ -72,4 +84,9 @@
 ;;
 
 (define count-even
-  'not-implemented)
+  (let ([count 0])
+    (lambda (x)
+      (when (even? x)
+        (set! count (+ count 1)))
+      count)))
+
