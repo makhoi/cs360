@@ -83,10 +83,11 @@
 ;; argument, including the current argument.
 ;;
 
-(define count-even
+(define (make-count-even)
   (let ([count 0])
     (lambda (x)
       (when (even? x)
         (set! count (+ count 1)))
       count)))
+
 
