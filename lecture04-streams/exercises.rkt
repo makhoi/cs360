@@ -12,7 +12,9 @@
 ;  (stream-nth 2 (stream 1 2 3)) => 3
 
 (define (stream-nth n s)
-  'not-implemented)
+  (if (= n 0) (stream-first s)
+  (stream-nth (- n 1) (stream-rest s)))
+)
 
 ; Create a new stream that is the result of applying the function f to the
 ; stream s.

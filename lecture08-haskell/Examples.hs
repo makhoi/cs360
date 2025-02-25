@@ -31,8 +31,16 @@ isThisWorking = "Yes"
 --
 
 -- Return the nth element of a list, counting from 0.
-nth :: Int -> [a] -> a
-nth = error "nth unimplemented"
+nth :: Int -> [a] -> a --this said: if you give me a list of everything, I will give you back anything
+                       --Understand type signature:
+                       --nth: function name
+                       -- :: has the type 
+                       -- It takes an index type int
+                       -- It takes a list of elements [a] of any type
+                       -- It returns a single element of type a
+nth _ [] = error"Empty list"
+nth 0 (x:_) = x
+nth n (_:xs) = nth (n-1) xs
 
 -- We use generators in this test. See Section 5.1 of PIH. [1..5] is the list
 -- containing the numbers 1 through 5, inclusive.
